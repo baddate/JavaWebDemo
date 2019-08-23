@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -45,7 +46,7 @@ public class StuffServlet extends HttpServlet{
 			System.out.println(req.getParameter("names"));
 			temp.setAccount(req.getParameter("account"));
 			temp.setEmail(req.getParameter("email"));
-			temp.setPassword(req.getParameter("pwd"));
+			temp.setPassword(req.getParameter("password"));
 			temp.setPhone(req.getParameter("phone"));
 			//temp.setId(Integer.parseInt(req.getParameter("id")));
 			temp.setDate(date.toLocaleString());
@@ -70,6 +71,30 @@ public class StuffServlet extends HttpServlet{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else if(testurl.equals("/admin/admin_list")) {
+			System.out.println("ADMIN LIST");
+			ArrayList<Stuff> admin_list=new ArrayList<Stuff>();
+			String sql = "select * from stuff";
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				conn=DriverManager.getConnection(url, username, password);
+				Statement stmt =(Statement) conn.createStatement();
+				ResultSet rs = stmt.executeQuery(sql);
+				while(rs.next()) {
+					Stuff stf=new Stuff();
+					stf.setName(rs.getString("name"));
+					stf.setAccount(rs.getString("account"));
+					stf.setEmail(rs.getString("email"));
+					stf.setPhone(rs.getString("phone"));
+					admin_list.add(stf);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			req.setAttribute("adminlist", admin_list);
+			
+			req.getRequestDispatcher("test.jsp").forward(req, resp);
 		}
 	}
 	/**
