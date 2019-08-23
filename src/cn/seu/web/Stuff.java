@@ -1,6 +1,7 @@
 package cn.seu.web;
 
 public class Stuff {
+	private int id;
 	private String account;
 	private String name;
 	private String email;
@@ -8,12 +9,13 @@ public class Stuff {
 	private String role;
 	private String date;
 	private String password;
-	public Stuff() {
+	private String idcard;
+	private String privilege;
+	
+	public Stuff(int id, String account, String name, String email, String phone, String role, String date,
+			String password, String idcard, String privilege) {
 		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Stuff(String account, String name, String email, String phone, String role, String date, String password) {
-		super();
+		this.id = id;
 		this.account = account;
 		this.name = name;
 		this.email = email;
@@ -21,7 +23,32 @@ public class Stuff {
 		this.role = role;
 		this.date = date;
 		this.password = password;
+		this.idcard = idcard;
+		this.privilege = privilege;
 	}
+	public String getPrivilege() {
+		return privilege;
+	}
+	public void setPrivilege(String privilege) {
+		this.privilege = privilege;
+	}
+	public String getIdcard() {
+		return idcard;
+	}
+	public void setIdcard(String idcard) {
+		this.idcard = idcard;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Stuff() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getPassword() {
 		return password;
 	}

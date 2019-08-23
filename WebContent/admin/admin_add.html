@@ -49,19 +49,19 @@
             <form action="admin_add.test" method="post" class="main_form">
                     <div class="text_info clearfix"><span>姓名：</span></div>
                     <div class="input_info">
-                        <input type="text" name="admin_name"/>
+                        <input type="text" name="names"/>
                         <span class="required">*</span>
                         <div class="validate_msg_long">20长度以内的汉字、字母、数字的组合</div>
                     </div>
                     <div class="text_info clearfix"><span>管理员账号：</span></div>
                     <div class="input_info">
-                        <input type="text"  name="admin_account"/>
+                        <input type="text"  name="account"/>
                         <span class="required">*</span>
                         <div class="validate_msg_long">30长度以内的字母、数字和下划线的组合</div>
                     </div>
                     <div class="text_info clearfix"><span>密码：</span></div>
                     <div class="input_info">
-                        <input type="password"  name="admin_pwd"/>
+                        <input type="password"  name="password"/>
                         <span class="required">*</span>
                         <div class="validate_msg_long error_msg">30长度以内的字母、数字和下划线的组合</div>
                     </div>
@@ -73,13 +73,13 @@
                     </div>      
                     <div class="text_info clearfix"><span>电话：</span></div>
                     <div class="input_info">
-                        <input type="text" name="admin_phone" class="width200"/>
+                        <input type="text" name="phone" class="width200"/>
                         <span class="required">*</span>
                         <div class="validate_msg_medium error_msg">正确的电话号码格式：手机或固话</div>
                     </div>
                     <div class="text_info clearfix"><span>Email：</span></div>
                     <div class="input_info">
-                        <input type="text" name="admin_email" class="width200"/>
+                        <input type="text" name="email" class="width200"/>
                         <span class="required">*</span>
                         <div class="validate_msg_medium error_msg">50长度以内，正确的 email 格式</div>
                     </div>
@@ -87,7 +87,7 @@
                     <div class="input_info_high">
                         <div class="input_info_scroll">
                             <ul>
-                                <li><input type="checkbox"  />超级管理员</li>
+                                <li><input type="checkbox"  name="privilege"/>超级管理员</li>
                                 <li><input type="checkbox" />账务账号管理员</li>
                                 <li><input type="checkbox" />业务账号管理员</li>
                                 <li><input type="checkbox" />账务账号管理员</li>

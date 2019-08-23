@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 public class StuffServlet extends HttpServlet{
 	
 	Connection  conn;
-	final String url = "jdbc:mysql://localhost:3306/project";
+	final String url = "jdbc:mysql://localhost:3306/seuWeb";
 	final String username = "root";
 	final String password = "123456";
 	@Override
@@ -29,45 +29,48 @@ public class StuffServlet extends HttpServlet{
 	}
 	
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//super.doPost(req, resp);
-		System.out.println("temp test");
 		
+		java.util.Date date = new java.util.Date();
 		String testurl=pareRequestURI(req);
-		Stuff temp=new Stuff();
-		
-		temp.setName(req.getParameter("admin_name"));
-		temp.setAccount(req.getParameter("admin_account"));
-		temp.setEmail(req.getParameter("admin_email"));
-		temp.setPassword(req.getParameter("admin_pwd"));
-		temp.setPhone(req.getParameter("admin_phone"));
-		String sql="insert into admin(admin_name,admin_account,admin_pwd,admin_email,admin_phone) values('"+temp.getName()+"','"
-		+temp.getAccount()+"','"
-		+temp.getPassword()+"','"
-		+temp.getEmail()+"','"
-		+temp.getPhone()+
-		"')";
-		System.out.println(req.getParameter("admin_name"));
-		
-		System.out.println("temp sql");
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn=DriverManager.getConnection(url, username, password);
-			System.out.println("test mysql");
-
-            
-			Statement stmt =(Statement) conn.createStatement();
-
-			stmt.execute(sql);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		System.out.println(testurl);
+		if(testurl.equals("/admin/admin_add")) {
+			System.out.println("ADMIN ADD");
+			Stuff temp=new Stuff();
+			temp.setName(req.getParameter("names"));
+			System.out.println(req.getParameter("names"));
+			temp.setAccount(req.getParameter("account"));
+			temp.setEmail(req.getParameter("email"));
+			temp.setPassword(req.getParameter("pwd"));
+			temp.setPhone(req.getParameter("phone"));
+			//temp.setId(Integer.parseInt(req.getParameter("id")));
+			temp.setDate(date.toLocaleString());
+			//temp.setRole("role");
+			temp.setPrivilege("privilege");
+			
+			String sql="insert into stuff(name,account,password,phone,email,authdate,privilege) values('"+temp.getName()+"','"
+			+temp.getAccount()+"','"
+			+temp.getPassword()+"','"
+			+temp.getPhone()+"','"
+			+temp.getEmail()+"','"
+			+temp.getDate()+"','"
+			+temp.getPrivilege()+
+			"')";
+			System.out.println("temp sql");
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				conn=DriverManager.getConnection(url, username, password);
+				Statement stmt =(Statement) conn.createStatement();
+				stmt.execute(sql);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		System.out.println("this is a dopost!");
-
-		
 	}
 	/**
 	 * 解析请求路径，获取到请求的路径，如【http://localhost/MySpringMVC/testServlet】--> 【/testServlet】
