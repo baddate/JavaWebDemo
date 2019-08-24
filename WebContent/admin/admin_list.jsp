@@ -174,7 +174,7 @@
 					    </c:if> 
 					         <td class="td_modi">
                                 <input type="button" value="修改" class="btn_modify"  onclick="location.href='admin_modi.jsp';" />
-                                <input type="submit" value="删除" class="btn_delete" onclick="location.href='admin_del.test';" />
+                                <input type="button" value="删除" class="btn_delete" onclick="location.href='admin_del.test?name=${admin.name}';" />
                             </td>
 					         
 					         </tr>

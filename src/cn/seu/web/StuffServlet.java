@@ -157,7 +157,7 @@ public class StuffServlet extends HttpServlet{
 
 			temp.setName(req.getParameter("name"));
 			String sql="delete from stuff where name='"+temp.getName()+"'";
-					
+			System.out.println(temp.getName());
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				conn=DriverManager.getConnection(url, username, password);
@@ -168,6 +168,7 @@ public class StuffServlet extends HttpServlet{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			//req.getRequestDispatcher("admin.test").forward(req, resp);
 			resp.sendRedirect("admin_list.test");
 		}else if(testurl.equals("/login")) {//login
 			System.out.println("LOGIN");
