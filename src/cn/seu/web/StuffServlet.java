@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 public class StuffServlet extends HttpServlet{
-	
+	String Account="";
 	Connection  conn;
 	final String url = "jdbc:mysql://localhost:3306/seuWeb?characterEncoding=utf-8";
 	final String username = "root";
@@ -134,7 +134,7 @@ public class StuffServlet extends HttpServlet{
 			temp.setPassword(req.getParameter("password"));
 			System.out.println(temp.getAccount()+" "+temp.getPassword());
 			String sql="select * from stuff where account='"+temp.getAccount()+"'";
-			
+			Account=temp.getAccount();
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				conn=DriverManager.getConnection(url, username, password);
@@ -154,7 +154,32 @@ public class StuffServlet extends HttpServlet{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else if(testurl.equals("/user/user_modi_pwd")) {
+			System.out.println("MODI PWD");
+			
+			String olds=req.getParameter("opwd");
+			String news=req.getParameter("npwd");
+			String nnews=req.getParameter("nnpwd");
+			System.out.println(news+"  "+nnews);
+			if(news.equals(nnews)) {
+				String sql="update stuff set password='"+nnews+"' where account='"+Account+"'";
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+					conn=DriverManager.getConnection(url, username, password);
+					Statement stmt =(Statement) conn.createStatement();
+					stmt.execute(sql);
+					System.out.println("pwd modi");
+					resp.sendRedirect("../index.html");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}else {
+				System.out.println("NOT MATCH! 两次新密码必须相同!!");
+				resp.sendRedirect("notmatch.html");
+			}
 		}
+			
 	}
 	/**
 	 * 
