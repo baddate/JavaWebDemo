@@ -117,7 +117,10 @@
 					         <td>${admin.phone}</td>
 					         <td>${admin.email}</td>
 					         <td>${admin.date}</td>
-					         
+					         <td class="td_modi">
+                                <input type="button" value="修改" class="btn_modify"  onclick="location.href='admin_modi.jsp';" />
+                                <input type="button" value="删除" class="btn_delete" onclick="deleteAdmin();" />
+                            </td>
 					         
 					         </tr>
 					     </c:forEach>  

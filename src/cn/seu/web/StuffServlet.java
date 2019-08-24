@@ -102,6 +102,30 @@ public class StuffServlet extends HttpServlet{
 			req.setAttribute("adminlist", admin_list);
 			
 			req.getRequestDispatcher("admin_list.jsp").forward(req, resp);
+		}else if(testurl.equals("/admin/admin_modi")) {
+			System.out.println("ADMIN MODI");
+			Stuff temp=new Stuff();
+			//temp.setId(Integer.parseInt(req.getParameter("id")));
+			temp.setName(req.getParameter("name"));
+			temp.setAccount(req.getParameter("account"));
+			temp.setEmail(req.getParameter("email"));
+			temp.setPhone(req.getParameter("phone"));
+			System.out.println(temp.getPhone());
+			String sql="update stuff set name='"+temp.getName()+"',account='"
+			+temp.getPassword()+"',phone='"+temp.getPhone()+"',email='"+temp.getEmail()+"' "
+					+ "where name='"+temp.getName()+"'";
+					
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				conn=DriverManager.getConnection(url, username, password);
+				Statement stmt =(Statement) conn.createStatement();
+				stmt.execute(sql);
+				System.out.println("update");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			resp.sendRedirect("admin_list.test");
 		}
 	}
 	/**
