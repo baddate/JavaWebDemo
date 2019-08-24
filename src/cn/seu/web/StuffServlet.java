@@ -182,6 +182,14 @@ public class StuffServlet extends HttpServlet{
 			System.out.println("USER INFO");
 			String sql="select * from  stuff where account='"+Account+"'";
 			Stuff stf=new Stuff();
+			Stuff temp=new Stuff();
+			//temp.setId(Integer.parseInt(req.getParameter("id")));
+			temp.setName(req.getParameter("name"));
+			temp.setAccount(req.getParameter("account"));
+			temp.setEmail(req.getParameter("email"));
+			temp.setPhone(req.getParameter("phone"));
+			String sqls="update stuff set name='"+temp.getName()+"',phone='"+temp.getPhone()+"',email='"+temp.getEmail()+"' "
+							+ "where account='"+temp.getAccount()+"'";
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				conn=DriverManager.getConnection(url, username, password);
@@ -197,13 +205,14 @@ public class StuffServlet extends HttpServlet{
 					stf.setDate(sdf.format(rs.getDate("authdate")));
 					stf.setRole(rs.getString("role"));
 				}
+				stmt.execute(sqls);
+				System.out.println("update info");
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			req.setAttribute("user", stf);
-			
 			req.getRequestDispatcher("user_info.jsp").forward(req, resp);
 		}
 			
