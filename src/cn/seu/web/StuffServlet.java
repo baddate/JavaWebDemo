@@ -176,8 +176,35 @@ public class StuffServlet extends HttpServlet{
 				}
 			}else {
 				System.out.println("NOT MATCH! 两次新密码必须相同!!");
-				resp.sendRedirect("notmatch.html");
+				resp.sendRedirect("../notmatch.html");
 			}
+		}else if(testurl.equals("/user/user_info")) {
+			System.out.println("USER INFO");
+			String sql="select * from  stuff where account='"+Account+"'";
+			Stuff stf=new Stuff();
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				conn=DriverManager.getConnection(url, username, password);
+				Statement stmt =(Statement) conn.createStatement();
+				ResultSet rs = stmt.executeQuery(sql);
+				while(rs.next()) {
+					
+					stf.setName(rs.getString("name"));
+					stf.setId(rs.getInt("id"));
+					stf.setAccount(rs.getString("account"));
+					stf.setEmail(rs.getString("email"));
+					stf.setPhone(rs.getString("phone"));
+					stf.setDate(sdf.format(rs.getDate("authdate")));
+					stf.setRole(rs.getString("role"));
+				}
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			req.setAttribute("user", stf);
+			
+			req.getRequestDispatcher("user_info.jsp").forward(req, resp);
 		}
 			
 	}

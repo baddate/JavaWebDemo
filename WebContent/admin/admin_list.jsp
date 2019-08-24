@@ -117,6 +117,13 @@
 					         <td>${admin.phone}</td>
 					         <td>${admin.email}</td>
 					         <td>${admin.date}</td>
+					         <td>
+                                <a class="summary"  onmouseover="showDetail(true,this);" onmouseout="showDetail(false,this);">超级管理员...</a>
+                                <!--浮动的详细信息-->
+                                <div class="detail_info">
+                                    	超级管理员，角色管理员
+                                </div>
+                            </td>
 					         <td class="td_modi">
                                 <input type="button" value="修改" class="btn_modify"  onclick="location.href='admin_modi.jsp';" />
                                 <input type="button" value="删除" class="btn_delete" onclick="deleteAdmin();" />
