@@ -10,7 +10,7 @@
         <link type="text/css" rel="stylesheet" media="all" href="styles/global_color.css" /> 
     </head>
     <body class="index">
-    <form action="login.t" method="post">
+    <form action="login.test" method="post">
         <div class="login_box">
             <table>
                 <tr>

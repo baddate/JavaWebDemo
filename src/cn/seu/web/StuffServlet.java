@@ -126,6 +126,34 @@ public class StuffServlet extends HttpServlet{
 				e.printStackTrace();
 			}
 			resp.sendRedirect("admin_list.test");
+		}else if(testurl.equals("/login")) {
+			System.out.println("LOGIN");
+			
+			Stuff temp=new Stuff();
+			temp.setAccount(req.getParameter("account"));
+			temp.setPassword(req.getParameter("password"));
+			System.out.println(temp.getAccount()+" "+temp.getPassword());
+			String sql="select * from stuff where account='"+temp.getAccount()+"'";
+			
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				conn=DriverManager.getConnection(url, username, password);
+				Statement stmt =(Statement) conn.createStatement();
+				ResultSet rs = stmt.executeQuery(sql);
+				//System.out.println(rs.getString("password"));
+				while(rs.next()) {
+					if(rs.getString("password").equals(temp.getPassword())) {
+						System.out.println("===========");
+						resp.sendRedirect("index.html");
+					}else {
+						resp.sendRedirect("error.html");
+					}
+				}
+				
+		} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	/**
