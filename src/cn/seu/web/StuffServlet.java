@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 public class StuffServlet extends HttpServlet{
 	
 	Connection  conn;
-	final String url = "jdbc:mysql://localhost:3306/seuWeb";
+	final String url = "jdbc:mysql://localhost:3306/seuWeb?characterEncoding=utf-8";
 	final String username = "root";
 	final String password = "123456";
 	@Override
@@ -35,7 +36,10 @@ public class StuffServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//super.doPost(req, resp);
-		
+		resp.setContentType("text/html;charset=utf-8");
+	    resp.setCharacterEncoding("UTF-8");
+	    SimpleDateFormat sdf = new SimpleDateFormat();// Ê†ºÂºèÂåñÊó∂Èó¥ 
+        sdf.applyPattern("yyyy-MM-dd");// a‰∏∫am/pmÁöÑÊ†áËÆ∞
 		java.util.Date date = new java.util.Date();
 		String testurl=pareRequestURI(req);
 		System.out.println(testurl);
@@ -61,7 +65,7 @@ public class StuffServlet extends HttpServlet{
 			+temp.getDate()+"','"
 			+temp.getPrivilege()+
 			"')";
-			System.out.println("temp sql");
+			System.out.println(temp.getName());
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				conn=DriverManager.getConnection(url, username, password);
@@ -71,6 +75,7 @@ public class StuffServlet extends HttpServlet{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			resp.sendRedirect("admin_list.test");
 		}else if(testurl.equals("/admin/admin_list")) {
 			System.out.println("ADMIN LIST");
 			ArrayList<Stuff> admin_list=new ArrayList<Stuff>();
@@ -83,9 +88,11 @@ public class StuffServlet extends HttpServlet{
 				while(rs.next()) {
 					Stuff stf=new Stuff();
 					stf.setName(rs.getString("name"));
+					stf.setId(rs.getInt("id"));
 					stf.setAccount(rs.getString("account"));
 					stf.setEmail(rs.getString("email"));
 					stf.setPhone(rs.getString("phone"));
+					stf.setDate(sdf.format(rs.getDate("authdate")));
 					admin_list.add(stf);
 				}
 			} catch (Exception e) {
@@ -94,11 +101,11 @@ public class StuffServlet extends HttpServlet{
 			}
 			req.setAttribute("adminlist", admin_list);
 			
-			req.getRequestDispatcher("test.jsp").forward(req, resp);
+			req.getRequestDispatcher("admin_list.jsp").forward(req, resp);
 		}
 	}
 	/**
-	 * Ω‚Œˆ«Î«Û¬∑æ∂£¨ªÒ»°µΩ«Î«Ûµƒ¬∑æ∂£¨»Á°æhttp://localhost/MySpringMVC/testServlet°ø--> °æ/testServlet°ø
+	 * 
 	 */
 	private String pareRequestURI(HttpServletRequest request) {
 		String path = request.getContextPath();
