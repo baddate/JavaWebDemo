@@ -58,7 +58,7 @@
                 <li><a href="../service/service_list.html" class="service_off"></a></li>
                 <li><a href="../bill/bill_list.html" class="bill_off"></a></li>
                 <li><a href="../report/report_list.html" class="report_off"></a></li>
-                <li><a href="../user/user_info.html" class="information_off"></a></li>
+                <li><a href="../user/user_info.test" class="information_off"></a></li>
                 <li><a href="../user/user_modi_pwd.html" class="password_off"></a></li>
             </ul>            
         </div>
@@ -117,16 +117,64 @@
 					         <td>${admin.phone}</td>
 					         <td>${admin.email}</td>
 					         <td>${admin.date}</td>
-					         <td>
+					         
+					    <c:if test="${admin.role == 'on,null,null,on,'}">
+					   		<td>
                                 <a class="summary"  onmouseover="showDetail(true,this);" onmouseout="showDetail(false,this);">超级管理员...</a>
                                 <!--浮动的详细信息-->
                                 <div class="detail_info">
-                                    	超级管理员，角色管理员
+                                    	超级管理员，资费管理
                                 </div>
                             </td>
+					    </c:if>
+					   	<c:if test="${admin.role == 'on,on,on,on,'}">
+					   		<td>
+                                <a class="summary"  onmouseover="showDetail(true,this);" onmouseout="showDetail(false,this);">超级管理员...</a>
+                                <!--浮动的详细信息-->
+                                <div class="detail_info">
+                                    	超级管理员，资费管理,业务账号管理员,账务账号管理员
+                                </div>
+                            </td>
+					    </c:if> 	
+					    <c:if test="${admin.role == 'null,on,on,on,'}">
+					   		<td>
+                                <a class="summary"  onmouseover="showDetail(true,this);" onmouseout="showDetail(false,this);">超级管理员...</a>
+                                <!--浮动的详细信息-->
+                                <div class="detail_info">
+                                    	超级管理员，资费管理3
+                                </div>
+                            </td>
+					    </c:if> 
+					    <c:if test="${admin.role == 'on,null,on,on,'}">
+					   		<td>
+                                <a class="summary"  onmouseover="showDetail(true,this);" onmouseout="showDetail(false,this);">超级管理员...</a>
+                                <!--浮动的详细信息-->
+                                <div class="detail_info">
+                                    	超级管理员，资费管理4
+                                </div>
+                            </td>
+					    </c:if> 
+					    <c:if test="${admin.role == 'on,on,null,on,'}">
+					   		<td>
+                                <a class="summary"  onmouseover="showDetail(true,this);" onmouseout="showDetail(false,this);">超级管理员...</a>
+                                <!--浮动的详细信息-->
+                                <div class="detail_info">
+                                    	超级管理员，资费管理5
+                                </div>
+                            </td>
+					    </c:if> 
+					    <c:if test="${admin.role == 'on,on,null,on,'}">
+					   		<td>
+                                <a class="summary"  onmouseover="showDetail(true,this);" onmouseout="showDetail(false,this);">超级管理员...</a>
+                                <!--浮动的详细信息-->
+                                <div class="detail_info">
+                                    	超级管理员，资费管理6
+                                </div>
+                            </td>
+					    </c:if> 
 					         <td class="td_modi">
                                 <input type="button" value="修改" class="btn_modify"  onclick="location.href='admin_modi.jsp';" />
-                                <input type="button" value="删除" class="btn_delete" onclick="deleteAdmin();" />
+                                <input type="submit" value="删除" class="btn_delete" onclick="location.href='admin_del.test';" />
                             </td>
 					         
 					         </tr>

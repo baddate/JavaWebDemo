@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="java.io.*,java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -34,13 +35,13 @@
             <ul id="menu">
                 <li><a href="../index.html" class="index_off"></a></li>
                 <li><a href="../role/role_list.html" class="role_off"></a></li>
-                <li><a href="../admin/admin_list.html" class="admin_on"></a></li>
+                <li><a href="../admin/admin_list.test" class="admin_on"></a></li>
                 <li><a href="../fee/fee_list.html" class="fee_off"></a></li>
                 <li><a href="../account/account_list.html" class="account_off"></a></li>
                 <li><a href="../service/service_list.html" class="service_off"></a></li>
                 <li><a href="../bill/bill_list.html" class="bill_off"></a></li>
                 <li><a href="../report/report_list.html" class="report_off"></a></li>
-                <li><a href="../user/user_info.html" class="information_off"></a></li>
+                <li><a href="../user/user_info.test" class="information_off"></a></li>
                 <li><a href="../user/user_modi_pwd.html" class="password_off"></a></li>
             </ul>
         </div>
@@ -48,24 +49,40 @@
         <!--主要区域开始-->
         <div id="main">            
             <div id="save_result_info" class="save_success">保存成功！</div>
-            <form action="admin_modi.test" method="post" class="main_form">
+            <form action="admin_add.test" method="post" class="main_form">
                     <div class="text_info clearfix"><span>姓名：</span></div>
                     <div class="input_info">
-                        <input type="text" name="name"/>
+                        <input type="text" name="names"/>
                         <span class="required">*</span>
-                        <div class="validate_msg_long error_msg">20长度以内的汉字、字母、数字的组合</div>
+                        <div class="validate_msg_long">20长度以内的汉字、字母、数字的组合</div>
                     </div>
                     <div class="text_info clearfix"><span>管理员账号：</span></div>
-                    <div class="input_info"><input type="text"  name="account" readonly="readonly" class="readonly" /></div>
+                    <div class="input_info">
+                        <input type="text" name="account" />
+                        <span class="required">*</span>
+                        <div class="validate_msg_long">30长度以内的字母、数字和下划线的组合</div>
+                    </div>
+                    <div class="text_info clearfix"><span>密码：</span></div>
+                    <div class="input_info">
+                        <input type="password" name="password" />
+                        <span class="required">*</span>
+                        <div class="validate_msg_long error_msg">30长度以内的字母、数字和下划线的组合</div>
+                    </div>
+                    <div class="text_info clearfix"><span>重复密码：</span></div>
+                    <div class="input_info">
+                        <input type="password"  />
+                        <span class="required">*</span>
+                        <div class="validate_msg_long error_msg">两次密码必须相同</div>
+                    </div>      
                     <div class="text_info clearfix"><span>电话：</span></div>
                     <div class="input_info">
-                        <input type="text" name="phone"   />
+                        <input type="text" name="phone" class="width200"/>
                         <span class="required">*</span>
-                        <div class="validate_msg_long error_msg">正确的电话号码格式：手机或固话</div>
+                        <div class="validate_msg_medium error_msg">正确的电话号码格式：手机或固话</div>
                     </div>
                     <div class="text_info clearfix"><span>Email：</span></div>
                     <div class="input_info">
-                        <input type="text" name="email" class="width200" />
+                        <input type="text" name="email" class="width200"/>
                         <span class="required">*</span>
                         <div class="validate_msg_medium error_msg">50长度以内，正确的 email 格式</div>
                     </div>
@@ -96,3 +113,4 @@
         </div>
     </body>
 </html>
+    

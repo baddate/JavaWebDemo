@@ -52,17 +52,28 @@ public class StuffServlet extends HttpServlet{
 			temp.setEmail(req.getParameter("email"));
 			temp.setPassword(req.getParameter("password"));
 			temp.setPhone(req.getParameter("phone"));
+			String[] testadmin=new String[4];
+			testadmin[0]=req.getParameter("superadmin");
+			testadmin[1]=req.getParameter("billadmin");
+			testadmin[2]=req.getParameter("feeadmin");
+			testadmin[3]=req.getParameter("zadmin");
+			StringBuffer str5 = new StringBuffer();
+			for (String s : testadmin) {
+			    str5.append(s+",");
+			}
+			temp.setRole(str5.toString());
 			//temp.setId(Integer.parseInt(req.getParameter("id")));
 			temp.setDate(date.toLocaleString());
 			//temp.setRole("role");
 			temp.setPrivilege("privilege");
 			
-			String sql="insert into stuff(name,account,password,phone,email,authdate,privilege) values('"+temp.getName()+"','"
+			String sql="insert into stuff(name,account,password,phone,email,authdate,role,privilege) values('"+temp.getName()+"','"
 			+temp.getAccount()+"','"
 			+temp.getPassword()+"','"
 			+temp.getPhone()+"','"
 			+temp.getEmail()+"','"
 			+temp.getDate()+"','"
+			+temp.getRole()+"','"
 			+temp.getPrivilege()+
 			"')";
 			System.out.println(temp.getName());
@@ -92,6 +103,8 @@ public class StuffServlet extends HttpServlet{
 					stf.setAccount(rs.getString("account"));
 					stf.setEmail(rs.getString("email"));
 					stf.setPhone(rs.getString("phone"));
+					stf.setRole(rs.getString("role"));
+					System.out.println(stf.getRole());
 					stf.setDate(sdf.format(rs.getDate("authdate")));
 					admin_list.add(stf);
 				}
@@ -99,6 +112,7 @@ public class StuffServlet extends HttpServlet{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			req.setAttribute("adminlist", admin_list);
 			
 			req.getRequestDispatcher("admin_list.jsp").forward(req, resp);
@@ -110,9 +124,20 @@ public class StuffServlet extends HttpServlet{
 			temp.setAccount(req.getParameter("account"));
 			temp.setEmail(req.getParameter("email"));
 			temp.setPhone(req.getParameter("phone"));
+			String[] testadmin=new String[4];
+			testadmin[0]=req.getParameter("superadmin");
+			testadmin[1]=req.getParameter("billadmin");
+			testadmin[2]=req.getParameter("feeadmin");
+			testadmin[3]=req.getParameter("zadmin");
+			StringBuffer str5 = new StringBuffer();
+			for (String s : testadmin) {
+			    str5.append(s+",");
+			}
+			temp.setRole(str5.toString());
 			System.out.println(temp.getPhone());
 			String sql="update stuff set name='"+temp.getName()+"',account='"
-			+temp.getPassword()+"',phone='"+temp.getPhone()+"',email='"+temp.getEmail()+"' "
+			+temp.getAccount()+"',phone='"+temp.getPhone()+"',email='"+temp.getEmail()
+					+"',role='"+temp.getRole()+"' "
 					+ "where name='"+temp.getName()+"'";
 					
 			try {
@@ -126,7 +151,25 @@ public class StuffServlet extends HttpServlet{
 				e.printStackTrace();
 			}
 			resp.sendRedirect("admin_list.test");
-		}else if(testurl.equals("/login")) {
+		}else if(testurl.equals("/admin/admin_del")) {
+			System.out.println("ADMIN DEL");
+			Stuff temp=new Stuff();
+
+			temp.setName(req.getParameter("name"));
+			String sql="delete from stuff where name='"+temp.getName()+"'";
+					
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				conn=DriverManager.getConnection(url, username, password);
+				Statement stmt =(Statement) conn.createStatement();
+				stmt.execute(sql);
+				System.out.println("delete");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			resp.sendRedirect("admin_list.test");
+		}else if(testurl.equals("/login")) {//login
 			System.out.println("LOGIN");
 			
 			Stuff temp=new Stuff();
@@ -214,6 +257,8 @@ public class StuffServlet extends HttpServlet{
 			}
 			req.setAttribute("user", stf);
 			req.getRequestDispatcher("user_info.jsp").forward(req, resp);
+		}else if(testurl.equals("/role/role_list")) {
+			System.out.println("ROLE LIST");
 		}
 			
 	}
