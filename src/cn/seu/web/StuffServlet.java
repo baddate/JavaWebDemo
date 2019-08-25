@@ -189,9 +189,11 @@ public class StuffServlet extends HttpServlet{
 				while(rs.next()) {
 					if(rs.getString("password").equals(temp.getPassword())) {
 						System.out.println("===========");
-						resp.sendRedirect("index.html");
+						String str=rs.getString("role");
+						req.setAttribute("role", str);
+						req.getRequestDispatcher("index.jsp").forward(req, resp);
 					}else {
-						resp.sendRedirect("error.html");
+						System.out.println("ERROR");
 					}
 				}
 				
@@ -214,7 +216,7 @@ public class StuffServlet extends HttpServlet{
 					Statement stmt =(Statement) conn.createStatement();
 					stmt.execute(sql);
 					System.out.println("pwd modi");
-					resp.sendRedirect("../index.html");
+					resp.sendRedirect("../index.htm");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

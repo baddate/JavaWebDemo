@@ -324,6 +324,7 @@ body.index
     background-color: #00629f;
     background-image: url(../images/index_bg.jpg);
     background-position: center top;
+       background-size:100%;
     background-repeat: no-repeat;
 }
 

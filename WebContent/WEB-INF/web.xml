@@ -13,5 +13,24 @@
     <servlet-name>pages</servlet-name>  
     <url-pattern>*.test</url-pattern>  
   </servlet-mapping> 
-
+	<servlet>
+	  <servlet-name>my</servlet-name>
+	  <servlet-class>zzwxiangmu.zzwserv</servlet-class><!-- 所谓的反射机制可以简单理解为  不通过在java代码中new的形式  给我这个类的全路径（包路径+类名称）我也可以通过反射进行创建对象的过程 -->
+	  <init-param > 
+	     <param-name>username</param-name>
+	      <param-value>Jim</param-value>
+	  </init-param>
+	</servlet>
+	<servlet-mapping>
+	   <servlet-name>my</servlet-name>
+	   <url-pattern>*.html</url-pattern>
+	</servlet-mapping>
+	<servlet>
+	  <servlet-name>mydo</servlet-name>
+	  <servlet-class>zzwxiangmu.zzwdo</servlet-class><!-- 所谓的反射机制可以简单理解为  不通过在java代码中new的形式  给我这个类的全路径（包路径+类名称）我也可以通过反射进行创建对象的过程 -->
+	</servlet>
+	<servlet-mapping>
+	   <servlet-name>mydo</servlet-name>
+	   <url-pattern>*.do</url-pattern>
+	</servlet-mapping>
 </web-app>

@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>达内－NetCTOSS</title>
+        <title>SSSSSSSSSSS</title>
         <link type="text/css" rel="stylesheet" media="all" href="../styles/global.css" />
         <link type="text/css" rel="stylesheet" media="all" href="../styles/global_color.css" /> 
         <script language="javascript" type="text/javascript">
@@ -84,7 +84,7 @@
                     <div>角色：<input type="text" value="" class="text_search width200" /></div>
                     <div><input type="button" value="搜索" class="btn_search"/></div>
                     <input type="button" value="密码重置" class="btn_add" onclick="resetPwd();" />
-                    <input type="button" value="增加" class="btn_add" onclick="location.href='admin_add.html';" />
+                    <input type="button" value="增加" class="btn_add" onclick="location.href='admin_add.htm';" />
                 </div>
                 <!--删除和密码重置的操作提示-->
                 <div id="operate_result_info" class="operate_fail">
@@ -172,6 +172,15 @@
                                 </div>
                             </td>
 					    </c:if> 
+					    <c:if test="${admin.role == 'null,null,null,on,'}">
+					   		<td>
+                                <a class="summary"  onmouseover="showDetail(true,this);" onmouseout="showDetail(false,this);">超级管理员...</a>
+                                <!--浮动的详细信息-->
+                                <div class="detail_info">
+                                    	资费管理
+                                </div>
+                            </td>
+					    </c:if> 
 					         <td class="td_modi">
                                 <input type="button" value="修改" class="btn_modify"  onclick="location.href='admin_modi.jsp';" />
                                 <input type="button" value="删除" class="btn_delete" onclick="location.href='admin_del.test?name=${admin.name}';" />
@@ -195,8 +204,8 @@
         </div>
         <!--主要区域结束-->
         <div id="footer">
-            <p>[源自北美的技术，最优秀的师资，最真实的企业环境，最适用的实战项目]</p>
-            <p>版权所有(C)加拿大达内IT培训集团公司 </p>
+            <p>[=]</p>
+            <p>版=权所有(C)加拿大达内IT培训集团公司 </p>
         </div>
     </body>
 </html>
