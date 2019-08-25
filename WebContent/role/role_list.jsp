@@ -59,42 +59,72 @@
                             <th class="width600">拥有的权限</th>
                             <th class="td_modi"></th>
                         </tr>                      
-                        <tr>
-                            <td>1</td>
-                            <td>管理员</td>
-                            <td>角色管理、管理员管理、资费管理、账务账号、业务账号、账单、报表</td>
-                            <td>
-                                <input type="button" value="修改" class="btn_modify" onclick="location.href='role_modi.html';"/>
-                                <input type="button" value="删除" class="btn_delete" onclick="deleteRole();" />
+                       <c:forEach  items="${rolelist}"  var="role">
+                       <tr>
+					         <td>${role.id}</td>
+					         <td>${role.name}</td>
+					         <td>${role.privilege}</td>
+					      <c:if test="${role.privilege == 'on,on,on,on,on,on,on,'}">
+					   		<td>
+                                <a class="summary"  onmouseover="showDetail(true,this);" onmouseout="showDetail(false,this);">角色管理...</a>
+                                <!--浮动的详细信息-->
+                                <div class="detail_info">
+                                    	角色管理、管理员管理、资费管理、账务账号、业务账号、账单、报表
+                                </div>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>技术员</td>
-                            <td>超级管理员、账单管理员</td>
-                            <td>
-                                <input type="button" value="修改" class="btn_modify" />
-                                <input type="button" value="删除" class="btn_delete" />
+					    </c:if>
+					   	<c:if test="${role.privilege == 'on,null,null,null,null,null,null,'}">
+					   		<td>
+                                <a class="summary"  onmouseover="showDetail(true,this);" onmouseout="showDetail(false,this);">角色管理...</a>
+                                <!--浮动的详细信息-->
+                                <div class="detail_info">
+                                    	角色管理
+                                </div>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>总监</td>
-                            <td>超级管理员、账单管理员</td>
-                            <td>
-                                <input type="button" value="修改" class="btn_modify" />
-                                <input type="button" value="删除" class="btn_delete" />
+					    </c:if> 	
+					    <c:if test="${role.privilege == 'null,on,on,on,'}">
+					   		<td>
+                                <a class="summary"  onmouseover="showDetail(true,this);" onmouseout="showDetail(false,this);">超级管理员...</a>
+                                <!--浮动的详细信息-->
+                                <div class="detail_info">
+                                    	超级管理员，资费管理3
+                                </div>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>副总裁</td>
-                            <td>超级管理员、账单管理员</td>
-                            <td>
-                                <input type="button" value="修改" class="btn_modify" />
-                                <input type="button" value="删除" class="btn_delete" />
+					    </c:if> 
+					    <c:if test="${role.privilege == 'on,null,on,on,'}">
+					   		<td>
+                                <a class="summary"  onmouseover="showDetail(true,this);" onmouseout="showDetail(false,this);">超级管理员...</a>
+                                <!--浮动的详细信息-->
+                                <div class="detail_info">
+                                    	超级管理员，资费管理4
+                                </div>
                             </td>
-                        </tr>
+					    </c:if> 
+					    <c:if test="${role.privilege == 'on,on,null,on,'}">
+					   		<td>
+                                <a class="summary"  onmouseover="showDetail(true,this);" onmouseout="showDetail(false,this);">超级管理员...</a>
+                                <!--浮动的详细信息-->
+                                <div class="detail_info">
+                                    	超级管理员，资费管理5
+                                </div>
+                            </td>
+					    </c:if> 
+					    <c:if test="${role.privilege == 'on,on,null,on,'}">
+					   		<td>
+                                <a class="summary"  onmouseover="showDetail(true,this);" onmouseout="showDetail(false,this);">超级管理员...</a>
+                                <!--浮动的详细信息-->
+                                <div class="detail_info">
+                                    	超级管理员，资费管理6
+                                </div>
+                            </td>
+					    </c:if> 
+					         <td class="td_modi">
+                                <input type="button" value="修改" class="btn_modify"  onclick="location.href='role_modi.jsp';" />
+                                <input type="button" value="删除" class="btn_delete" onclick="location.href='admin_del.test?name=${role.name}';" />
+                            </td>
+					         
+					         </tr>   
+                       </c:forEach>
                     </table>
                 </div> 
                 <!--分页-->

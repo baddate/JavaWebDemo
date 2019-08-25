@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 public class StuffServlet extends HttpServlet{
+	String RoleName="";
 	String Account="";
 	Connection  conn;
 	final String url = "jdbc:mysql://localhost:3306/seuWeb?characterEncoding=utf-8";
@@ -260,6 +261,89 @@ public class StuffServlet extends HttpServlet{
 			req.getRequestDispatcher("user_info.jsp").forward(req, resp);
 		}else if(testurl.equals("/role/role_list")) {
 			System.out.println("ROLE LIST");
+			ArrayList<Role> role_list=new ArrayList<Role>();
+			String sql = "select * from role";
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				conn=DriverManager.getConnection(url, username, password);
+				Statement stmt =(Statement) conn.createStatement();
+				ResultSet rs = stmt.executeQuery(sql);
+				while(rs.next()) {
+					Role stf=new Role();
+					stf.setId(rs.getInt("id"));
+					stf.setName(rs.getString("name"));
+					stf.setPrivilege(rs.getString("privilege"));
+					role_list.add(stf);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			req.setAttribute("rolelist", role_list);
+			
+			req.getRequestDispatcher("role_list.jsp").forward(req, resp);
+		}else if(testurl.equals("/role/role_add")) {
+			System.out.println("ROLE ADD");
+			Role temp=new Role();
+			temp.setName(req.getParameter("name"));
+			RoleName=req.getParameter("name");
+			String[] testadmin=new String[7];
+			testadmin[0]=req.getParameter("p1");
+			testadmin[1]=req.getParameter("p2");
+			testadmin[2]=req.getParameter("p3");
+			testadmin[3]=req.getParameter("p4");
+			testadmin[4]=req.getParameter("p5");
+			testadmin[5]=req.getParameter("p6");
+			testadmin[6]=req.getParameter("p7");
+			StringBuffer str5 = new StringBuffer();
+			for (String s : testadmin) {
+			    str5.append(s+",");
+			}
+			
+			String sql="insert into role(name,privilege) values('"+temp.getName()+"','"
+			+temp.getPrivilege()+
+			"')";
+			System.out.println(temp.getName());
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				conn=DriverManager.getConnection(url, username, password);
+				Statement stmt =(Statement) conn.createStatement();
+				stmt.execute(sql);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			resp.sendRedirect("role_list.test");
+		}else if(testurl.equals("/role/role_modi")) {
+			System.out.println("ROLE MODI");
+			Role temp=new Role();
+			temp.setName(req.getParameter("name"));
+			RoleName=req.getParameter("name");
+			String[] testadmin=new String[7];
+			testadmin[0]=req.getParameter("p1");
+			testadmin[1]=req.getParameter("p2");
+			testadmin[2]=req.getParameter("p3");
+			testadmin[3]=req.getParameter("p4");
+			testadmin[4]=req.getParameter("p5");
+			testadmin[5]=req.getParameter("p6");
+			testadmin[6]=req.getParameter("p7");
+			StringBuffer str5 = new StringBuffer();
+			for (String s : testadmin) {
+			    str5.append(s+",");
+			}
+			String sql="update role set privilege='"+str5+"' where name='"+RoleName+"'";
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				conn=DriverManager.getConnection(url, username, password);
+				Statement stmt =(Statement) conn.createStatement();
+				stmt.execute(sql);
+				System.out.println("update role");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			resp.sendRedirect("role_list.test");
 		}
 			
 	}
